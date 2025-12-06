@@ -13,7 +13,7 @@ from cogs.bdo_events import BdoEventsCog
 from cogs.bdo_night import BdoNightCog
 from cogs.bdo_test import BdoTestCog
 from cogs.bdo_fish import BdoFishCog
-
+from cogs.bdo_dict import BdoDictCog
 
 # ---------- Discord Bot 設定 ----------
 
@@ -32,7 +32,7 @@ async def on_ready():
     print(" - !poop 啟動指定使用者自動 💩")
     print(" - !startnum / !endnum 猜數字遊戲")
     print(" - !lol / !lolend LoL 糾團（滿 5 人自動成團）")
-    print(" - !bdo_event / !bdo_night / !bdo_test 黑色沙漠相關")
+    print(" - !bdo_event / !bdo_night / !bdo_test / !bdo_fish / !bdo_dict 黑色沙漠相關")
     print(" - !cmd 顯示可用指令說明")
 
 
@@ -53,6 +53,8 @@ async def cmd_list(ctx: commands.Context):
         "  顯示黑色沙漠 Global Lab 測試伺服器公告連結。\n"
         "!bdo_fish\n"
         "  顯示 BDOLytics 黑色沙漠互動地圖（可查釣魚等）。\n"
+        "!bdo_dict\n"
+        "  顯示黑沙配方大全索引, 包含各類黑沙資訊。\n"
         "```\n"
         "```text\n"
         "[信奉無上的大便教主]\n"
@@ -93,6 +95,8 @@ async def setup_bot():
     await bot.add_cog(BdoNightCog(bot))
     await bot.add_cog(BdoTestCog(bot))
     await bot.add_cog(BdoFishCog(bot))
+    await bot.add_cog(BdoDictCog(bot))
+
 
 # ---------- FastAPI Web Server 設定 ----------
 
