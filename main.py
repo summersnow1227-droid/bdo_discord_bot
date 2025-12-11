@@ -14,6 +14,7 @@ from cogs.bdo_night import BdoNightCog
 from cogs.bdo_test import BdoTestCog
 from cogs.bdo_fish import BdoFishCog
 from cogs.bdo_dict import BdoDictCog
+from cogs.repeater import RepeaterCog
 
 # ---------- Discord Bot 設定 ----------
 
@@ -30,6 +31,7 @@ async def on_ready():
     print(f"✅ 已登入為：{bot.user} (ID: {bot.user.id})")
     print("功能：")
     print(" - !poop 啟動指定使用者自動 💩")
+    print(" - !repeat / !repeat_stop 啟動指定使用者復讀訊息")
     print(" - !startnum / !endnum 猜數字遊戲")
     print(" - !lol / !lolend LoL 糾團（滿 5 人自動成團）")
     print(" - !bdo_event / !bdo_night / !bdo_test / !bdo_fish / !bdo_dict 黑色沙漠相關")
@@ -63,6 +65,17 @@ async def cmd_list(ctx: commands.Context):
         "  - 分鐘：1~3，沒填預設 1 分鐘\n"
         "  - @使用者：可以標記多位，被標記的人發話就會被按 💩\n"
         "  - 若沒標記任何人，則對下指令的人生效\n"
+        "[指定復讀機]\n"
+        "!repeat [分鐘] @使用者\n"
+        "指定某位使用者成為復讀機，TA 說什麼我就複誦什麼。\n"
+        "- 分鐘：1~10，沒填預設 1 分鐘\n"
+        "- 只能指定 1 位對象\n"
+        "- 在時間內該使用者每次發話都會被原樣複製\n"
+        "- 重複使用 !repeat 會覆蓋舊設定並重新開始計時\n"
+        "!repeat_stop\n"
+        "手動停止復讀模式。\n"
+        "- 輸入指令者 / 管理員皆可停止\n"
+        "- 時間到也會自動停止\n"
         "\n"
         "[小遊戲]\n"
         "!startnum\n"
@@ -96,6 +109,7 @@ async def setup_bot():
     await bot.add_cog(BdoTestCog(bot))
     await bot.add_cog(BdoFishCog(bot))
     await bot.add_cog(BdoDictCog(bot))
+    await bot.add_cog(RepeaterCog(bot))
 
 
 # ---------- FastAPI Web Server 設定 ----------
